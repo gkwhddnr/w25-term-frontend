@@ -1,42 +1,17 @@
+* {
+    /* 모든 요소의 박스 모델을 border-box로 설정하여 패딩/마진이 크기를 늘리지 않게 함 */
+    box-sizing: border-box; 
+}
+
+html, body {
+    height: 100%; /* html과 body가 전체 높이를 차지하도록 설정 */
+    margin: 0;    /* 기본 마진 제거 */
+    padding: 0;   /* 기본 패딩 제거 */
+    overflow: auto; /* 필요 시 스크롤바 허용 */
+}
+
+/* React 앱이 렌더링되는 루트 요소 (일반적으로 #root) */
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+    height: 100%; /* #root도 100%를 채우게 함 */
+    width: 100%;
 }
