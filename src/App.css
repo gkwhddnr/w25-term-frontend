@@ -8,6 +8,9 @@ html, body {
     margin: 0;    /* 기본 마진 제거 */
     padding: 0;   /* 기본 패딩 제거 */
     overflow: auto; /* 필요 시 스크롤바 허용 */
+    background-size: cover; /* 화면에 꽉 차게 */
+    background-position: center; /* 중앙 정렬 */
+    background-repeat: no-repeat; /* 반복 없음 */
 }
 
 /* React 앱이 렌더링되는 루트 요소 (일반적으로 #root) */

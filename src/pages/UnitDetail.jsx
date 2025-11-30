@@ -1,16 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom'; 
 import HellBackground from '../../images/지옥디 사진/hell_background.png'; 
 import { units } from '../data/units';
 
 function getUnitImagePath(unit) {
   if (!unit || !unit.name) return null;
-
   const unitNameWithExtension = `${unit.name}.png`; 
   return `../../images/지옥디 사진/${unitNameWithExtension}`;
 }
 
+const auraStyles = {
+  // 🚨 대악마: 검은 날개 (흉내) + 진한 붉은 아우라
+  '대악마': { 
+    boxShadow: '0 0 30px 12px rgba(255, 0, 0, 1), 0 0 60px 25px rgba(125, 0, 0, 0.9)', 
+    border: '5px solid #000000ff', 
+  },
+  // 🚨 적대자: 검은 아우라
+  '적대자': {
+    boxShadow: '0 0 30px 12px rgba(0, 0, 0, 1), 0 0 60px 25px rgba(50, 50, 50, 0.9)', 
+    border: '5px solid #000000', 
+  },
+  // 🚨 타락천사: 밝은색과 검은색을 섞은 아우라
+  '타락천사': {
+    boxShadow: '0 0 15px 5px rgba(255, 215, 0, 0.6), 0 0 30px 10px rgba(255, 200, 0, 0.8)',
+    border: '3px solid #DAA520',
+  },
+  // 🚨 악인: 붉은색 + 검은 아우라
+  '악인': {
+    boxShadow: '0 0 25px 10px rgba(0, 236, 16, 0.85), 0 0 50px 20px rgba(255, 0, 0, 0.85)', 
+    border: '4px solid #d40000ff', 
+  },
+  // 🚨 일반 천사: 흰색 아우라
+  '일반 천사': {
+    boxShadow: '0 0 25px 10px rgba(255, 255, 255, 1), 0 0 50px 20px rgba(200, 200, 255, 0.8)', 
+    border: '5px solid #F0F8FF', 
+  },
+  // 🚀 영웅급 천사: 진한 파란색(하늘색 계열) 아우라로 극단적 강화
+  '영웅급 천사': {
+    boxShadow: '0 0 35px 15px rgba(0, 100, 255, 1), 0 0 70px 30px rgba(0, 100, 255, 0.8)', // 선명한 파란색 아우라
+    border: '6px solid #007FFF', // 매우 진한 파란색 테두리, 두께 증가
+  },
+  // 🚨 나머지 유닛: 얇은 붉은 아우라
+  '기본': {
+      boxShadow: '0 0 10px 3px rgba(200, 0, 0, 0.7), 0 0 20px 8px rgba(100, 0, 0, 0.5)', 
+      border: '2px solid #CC0000',
+  }
+};
+
 const themeStyles = {
+  // ... (스타일은 이전과 동일하게 유지)
   container: { 
     minHeight: '100vh',
     width: '100%',
@@ -40,6 +78,7 @@ const themeStyles = {
     maxWidth: '600px',
     width: '90%',
     boxShadow: '0 0 15px #8B0000',
+    textAlign: 'center',
   },
   detailText: {
     margin: '10px 0',
@@ -72,8 +111,13 @@ const themeStyles = {
     margin: '0 auto 20px auto',
     width: '196px', 
     height: '196px', 
-    border: '2px solid #FF4500',
     borderRadius: '5px',
+    padding: '5px', 
+    cursor: 'pointer', 
+    transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border 0.3s ease-in-out', 
+  },
+  unitImageHover: {
+      transform: 'scale(1.1)',
   },
   label: {
     fontWeight: 'bold',
@@ -93,6 +137,8 @@ function UnitDetail() {
   const { id } = useParams();
   const safeUnit = units.find(u => u.id === id); 
   
+  const [isHovered, setIsHovered] = useState(false); 
+
   if (!safeUnit) {
     return (
       <div style={themeStyles.container}>
@@ -111,7 +157,33 @@ function UnitDetail() {
 
   const imageUrl = getUnitImagePath(safeUnit);
   
-  // 🔽 상세 정보 필터링 로직: id, category를 제외하고 null인 값을 제외한 필드만 추출
+  // 🚨 유닛의 등급 판단 로직 (우선순위 고려)
+  let unitClass = '기본'; 
+
+  if (safeUnit.hierarchy === '대악마' || safeUnit.classification === '대악마') {
+    unitClass = '대악마';
+  } else if (safeUnit.hierarchy === '적대자' || safeUnit.classification === '적대자') {
+    unitClass = '적대자';
+  } else if (safeUnit.category === '타락천사') { 
+    unitClass = '타락천사';
+  } else if (safeUnit.category === '악인') { 
+    unitClass = '악인';
+  } else if (safeUnit.hierarchy && safeUnit.hierarchy.includes('영웅급')) { // 영웅급 천사
+    unitClass = '영웅급 천사';
+  } else if (safeUnit.category === '천사') { // 일반 천사
+    unitClass = '일반 천사';
+  }
+  
+  // 🚨 아우라 스타일 결정
+  const appliedAuraStyle = auraStyles[unitClass];
+  
+  // 🚨 최종 이미지 스타일 (기본 + 아우라 + 호버)
+  const finalImageStyle = {
+    ...themeStyles.unitImage,
+    ...appliedAuraStyle, 
+    ...(isHovered ? themeStyles.unitImageHover : {}),
+  };
+
   const fieldsToDisplay = Object.keys(safeUnit)
     .filter(key => 
       key !== 'id' && 
@@ -124,12 +196,13 @@ function UnitDetail() {
       <div style={themeStyles.detailBox}>
         <h1 style={themeStyles.title}>{safeUnit.name} 상세 정보</h1>
         
-        {/* 🔽 이미지 크기 고정 스타일 적용됨 */}
         {imageUrl && (
             <img 
               src={imageUrl} 
               alt={`${safeUnit.name} 유닛 이미지`} 
-              style={themeStyles.unitImage} 
+              style={finalImageStyle} 
+              onMouseEnter={() => setIsHovered(true)} 
+              onMouseLeave={() => setIsHovered(false)} 
               onError={(e) => { 
                 e.currentTarget.style.display = 'none';
                 console.error(`Image Load Error: Path ${imageUrl} not found.`);
@@ -137,7 +210,6 @@ function UnitDetail() {
             />
         )}
         
-        {/* 🔽 필터링된 상세 정보 출력 */}
         {fieldsToDisplay.map(key => (
           <p key={key} style={themeStyles.detailText}>
             <span style={themeStyles.label}>{fieldLabels[key] || key}:</span> <span>{safeUnit[key]}</span>
