@@ -10,37 +10,37 @@ function getUnitImagePath(unit) {
 }
 
 const auraStyles = {
-  // 🚨 대악마: 검은 날개 (흉내) + 진한 붉은 아우라
+  //  대악마: 검은색 + 진한 붉은 아우라
   '대악마': { 
     boxShadow: '0 0 30px 12px rgba(255, 0, 0, 1), 0 0 60px 25px rgba(125, 0, 0, 0.9)', 
     border: '5px solid #000000ff', 
   },
-  // 🚨 적대자: 검은 아우라
+  //  적대자: 검은 아우라
   '적대자': {
     boxShadow: '0 0 30px 12px rgba(0, 0, 0, 1), 0 0 60px 25px rgba(50, 50, 50, 0.9)', 
     border: '5px solid #000000', 
   },
-  // 🚨 타락천사: 밝은색과 검은색을 섞은 아우라
+  //  타락천사: 밝은색과 노란색을 섞은 아우라
   '타락천사': {
     boxShadow: '0 0 15px 5px rgba(255, 215, 0, 0.6), 0 0 30px 10px rgba(255, 200, 0, 0.8)',
     border: '3px solid #DAA520',
   },
-  // 🚨 악인: 붉은색 + 검은 아우라
+  //  악인: 붉은색 + 연한 녹색 아우라
   '악인': {
     boxShadow: '0 0 25px 10px rgba(0, 236, 16, 0.85), 0 0 50px 20px rgba(255, 0, 0, 0.85)', 
     border: '4px solid #d40000ff', 
   },
-  // 🚨 일반 천사: 흰색 아우라
+  //  일반 천사: 흰색 아우라
   '일반 천사': {
     boxShadow: '0 0 25px 10px rgba(255, 255, 255, 1), 0 0 50px 20px rgba(200, 200, 255, 0.8)', 
     border: '5px solid #F0F8FF', 
   },
-  // 🚀 영웅급 천사: 진한 파란색(하늘색 계열) 아우라로 극단적 강화
+  //  영웅급 천사: 진한 파란색(하늘색 계열) 아우라로 극단적 강화
   '영웅급 천사': {
     boxShadow: '0 0 35px 15px rgba(0, 100, 255, 1), 0 0 70px 30px rgba(0, 100, 255, 0.8)', // 선명한 파란색 아우라
     border: '6px solid #007FFF', // 매우 진한 파란색 테두리, 두께 증가
   },
-  // 🚨 나머지 유닛: 얇은 붉은 아우라
+  //  나머지 유닛: 얇은 붉은 아우라
   '기본': {
       boxShadow: '0 0 10px 3px rgba(200, 0, 0, 0.7), 0 0 20px 8px rgba(100, 0, 0, 0.5)', 
       border: '2px solid #CC0000',
@@ -48,7 +48,6 @@ const auraStyles = {
 };
 
 const themeStyles = {
-  // ... (스타일은 이전과 동일하게 유지)
   container: { 
     minHeight: '100vh',
     width: '100%',
@@ -157,7 +156,7 @@ function UnitDetail() {
 
   const imageUrl = getUnitImagePath(safeUnit);
   
-  // 🚨 유닛의 등급 판단 로직 (우선순위 고려)
+  // 유닛의 등급 판단 로직 (우선순위 고려)
   let unitClass = '기본'; 
 
   if (safeUnit.hierarchy === '대악마' || safeUnit.classification === '대악마') {
@@ -174,10 +173,10 @@ function UnitDetail() {
     unitClass = '일반 천사';
   }
   
-  // 🚨 아우라 스타일 결정
+  // 아우라 스타일 결정
   const appliedAuraStyle = auraStyles[unitClass];
   
-  // 🚨 최종 이미지 스타일 (기본 + 아우라 + 호버)
+  // 최종 이미지 스타일 (기본 + 아우라 + 호버)
   const finalImageStyle = {
     ...themeStyles.unitImage,
     ...appliedAuraStyle, 

@@ -16,7 +16,6 @@ function App() {
 
   return (
     <div style={{ minHeight: '100vh', width: '100%' }}>
-      {/* 1. isLoading이 true일 때만 OpeningScene을 표시 */}
       {isLoading ? (
         <OpeningScene onFinish={handleOpeningFinish} />
       ) : (

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function UnitList({ units }) {
     
-    // 🚨 1. 유닛을 주 목록 (Main Group)에 따라 분류
+    // 1. 유닛을 주 목록 (Main Group)에 따라 분류
     const mainGroups = units.reduce((acc, unit) => {
         const category = unit.category || '기타';
         
@@ -24,7 +24,7 @@ function UnitList({ units }) {
     }, {});
 
 
-    // 🚨 2. 각 주 목록 내부를 '하위 목록 (Subgroup)'으로 세부 그룹화
+    // 2. 각 주 목록 내부를 '하위 목록 (Subgroup)'으로 세부 그룹화
     const finalGroupedStructure = {};
 
     for (const [mainGroupName, mainGroupUnits] of Object.entries(mainGroups)) {
@@ -153,7 +153,7 @@ function UnitList({ units }) {
 
     return (
         <div style={containerStyle}>
-            <h1 style={titleStyle}> 지옥 디펜스 유닛 정보</h1>
+            <h1 style={titleStyle}>스타크래프트 유즈맵 지옥 디펜스 유닛 정보</h1>
             
             {mainGroupOrder.filter(key => finalGroupedStructure[key]).map(mainGroupName => (
                 <div key={mainGroupName} style={sectionBoxStyle}>
