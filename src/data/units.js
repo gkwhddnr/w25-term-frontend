@@ -10,9 +10,6 @@ export const units = [
     range: 5,
     speedOfAttack: 30,
     description: "세계의 종말에 나타나 재앙을 불러오는 네 명의 존재",
-    health: null,
-    shield: null,
-    reward: null,
   },
   {
     id: "69295beb825f26660330b7d3",
@@ -25,9 +22,6 @@ export const units = [
     range: 5,
     speedOfAttack: 20,
     description: "흡혈귀나 마녀로 유래된 토속 신앙의 해로운 악귀/악령",
-    health: null,
-    shield: null,
-    reward: null,
   },
   {
     id: "69295beb825f26660330b7d4",
@@ -40,9 +34,6 @@ export const units = [
     range: 5,
     speedOfAttack: 7,
     description: "개구쟁이, 장난꾸러기 등으로 표현된 어린 악마",
-    health: null,
-    shield: null,
-    reward: null,
   },
   {
     id: "69295beb825f26660330b7d6",
@@ -664,4 +655,16 @@ export const units = [
     shield: null,
     reward: null,
   },
+  {
+    id: "69297898825f26660330b817",
+    category: "악마",
+    hierarchy: "적대자",
+    name: "벨페고르",
+    nickname: "나태의 악마(나태)",
+    type: "스플 3x3",
+    damage: "2300(+1150)",
+    range: 10,
+    speedOfAttack: 10,
+    description: "악마들의 대공으로 불린 존재, 건물의 방어력(+50) 증가 및 실드량(+1) 증가시킨다. 또한 일정시간마다 지옥의 왕좌 건물을 100%로 회복시킨다.",
+  }
 ];
