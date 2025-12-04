@@ -5,8 +5,8 @@ import './OpeningScene.css';
 import HellBackground from '../../images/지옥디 사진/hell_background.png';
 
 const QUOTES = [
-  "신은 옥좌와 위광에 대항하여 불경하고 \n오만불손한 싸움을 감히 하늘에서 일으켰다.\n-Paradise Lost-",
-  "용은 전쟁을 벌이다 지옥으로 쫓겨난다. \n미카엘은 사탄의 무리를 없애기 위해 지옥으로 진격한다.\n-요한계시록-"
+  "신의 옥좌와 위광에 대항하여 불경하고 \n오만불손한 싸움을 감히 하늘에서 일으켰다.\n-Paradise Lost-",
+  "용은 전쟁을 벌이다 쫓겨나 지옥으로 내려간다. \n미카엘은 사탄의 무리를 없애기 위해 지옥으로 진격한다.\n-요한계시록-"
 ];
 
 const TYPING_DELAY = 50; 
