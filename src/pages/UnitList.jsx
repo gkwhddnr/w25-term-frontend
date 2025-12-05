@@ -5,8 +5,8 @@ function UnitList({ units }) {
     
     // 1. 유닛을 주 목록 (Main Group)에 따라 분류
     const mainGroups = units.reduce((acc, unit) => {
-        const category = unit.category || '기타';
-        
+        const category = unit.category || '기타'; // category가 null이면 '기타'로 설정
+
         // 악마 그룹에 포함되는 유닛
         if (category === '악마' || category === '악인' || category === '적대자' || category === '타락천사' || category === '건물') {
             acc['악마'] = acc['악마'] || [];
@@ -15,8 +15,8 @@ function UnitList({ units }) {
         } else if (category === '천사') {
             acc['천사'] = acc['천사'] || [];
             acc['천사'].push(unit);
-
-        } else if (category === '기타') {
+        // 💡 수정: 위의 어떤 그룹에도 속하지 않으면 모두 '기타' 그룹으로 보냅니다.
+        } else { 
             acc['기타'] = acc['기타'] || [];
             acc['기타'].push(unit);
         }
@@ -33,18 +33,23 @@ function UnitList({ units }) {
         const getSubGroupKey = (unit) => {
             const hierarchy = unit.hierarchy || unit.classification || unit.category;
             
-            // 😈 악마 주 목록 내 하위 분류
+            // 악마 주 목록 내 하위 분류
             if (mainGroupName === '악마') {
-                if (unit.category === '타락천사') return '타락천사'; 
-                if (unit.category === '건물') return '건물'; 
-                if (unit.category === '악인') return '악인'; 
-                if (hierarchy === '하급악마') return '하급 악마';
-                if (hierarchy === '중급악마') return '중급 악마';
-                if (hierarchy === '상급악마') return '상급 악마';
-                if (hierarchy === '대악마') return '대악마';
-                if (hierarchy === '적대자') return '적대자';
-                return '기타 악마'; 
-            }
+        
+            // 계급(hierarchy) 기반 분류를 먼저 확인합니다.
+            if (hierarchy === '대악마') return '대악마';
+            if (hierarchy === '상급악마') return '상급 악마';
+            if (hierarchy === '중급악마') return '중급 악마';
+            if (hierarchy === '하급악마') return '하급 악마'; 
+            if (hierarchy === '적대자') return '적대자';
+
+            // category 기반 분류를 그 다음으로 확인합니다.
+            if (unit.category === '타락천사') return '타락천사'; 
+            if (unit.category === '건물') return '건물'; 
+            if (unit.category === '악인') return '악인'; 
+            
+            return '기타 악마'; // 위의 어디에도 속하지 않는 경우
+        }
             
             
             if (mainGroupName === '천사') {
@@ -114,6 +119,21 @@ function UnitList({ units }) {
         maxWidth: '800px',
         width: '100%',
     };
+    const sloganStyle = {
+        color: '#FF4500', // 오렌지 레드
+        fontSize: '1.5em',
+        textAlign: 'center',
+        margin: '20px auto 40px auto', // 위아래 여백을 더 줍니다.
+        padding: '10px 20px',
+        maxWidth: '700px',
+        border: '3px solid #8B0000', // 다크 레드 테두리
+        borderRadius: '5px',
+        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+        textShadow: '0 0 10px #FFD700, 0 0 5px #FF0000', // 금색과 빨간색이 섞인 그림자 효과
+        boxShadow: '0 0 15px rgba(255, 0, 0, 0.5)', // 바깥쪽에 옅은 빨간색 그림자
+        fontWeight: 'bold',
+        letterSpacing: '2px',
+    };
     const mainSectionTitleStyle = {
         color: '#FF4500', 
         textShadow: '0 0 5px #FFD700',
@@ -155,6 +175,11 @@ function UnitList({ units }) {
         <div style={containerStyle}>
             <h1 style={titleStyle}>스타크래프트 유즈맵 지옥 디펜스 유닛 정보</h1>
             
+            <div style={sloganStyle}>
+                지옥에 처 들어오는 천사의 무리로부터 왕좌를 지켜내고<br />
+                지옥의 지배자가 되어라!
+            </div>
+
             {mainGroupOrder.filter(key => finalGroupedStructure[key]).map(mainGroupName => (
                 <div key={mainGroupName} style={sectionBoxStyle}>
                     <h2 style={mainSectionTitleStyle}>

@@ -1,5 +1,3 @@
-// HellApi.js
-
 import axios from 'axios';
 
 // 기본 API 인스턴스 생성 및 baseURL 설정
