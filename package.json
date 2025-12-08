@@ -2,6 +2,7 @@
   "name": "w25-term-frontend",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://gkwhddnr.github.io/w25-term-frontend",
   "type": "module",
   "scripts": {
     "dev": "vite",

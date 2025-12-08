@@ -49,7 +49,7 @@ const themeStyles = {
 
 const fieldLabels = {
   name: "이름", nickname: "이명", type: "공격 타입", damage: "공격력",
-  range: "사거리", speedofattack: "공격 속도", description: "설명", // Note: Service에서 speedofattack으로 키가 넘어올 수 있음
+  range: "사거리", speedOfAttack: "공격 속도", description: "설명", // Note: Service에서 speedofattack으로 키가 넘어올 수 있음
   health: "체력", health2: "체력", shield: "실드", reward: "보상", hierarchy: "계급", classification: "분류",
 };
 
@@ -64,7 +64,7 @@ const DISPLAY_ORDER = [
     'damage', 
     'shield', 
     'range', 
-    'speedofattack', // service에서 speedofattack으로 변환되었다고 가정
+    'speedOfAttack', 
     'description', 
     'reward', 
 ];
@@ -143,7 +143,8 @@ function UnitDetail({ units }) {
     // 유닛 이름이 '가브리엘'이고 계급이 '타락천사'일 경우 파일명을 강제로 변경합니다.
       imageFileName = `미카엘(타락천사).png`;
     }
-    const finalImageUrl = `http://localhost:8080/images/units/${encodeURIComponent(imageFileName)}`;
+    
+    const finalImageUrl = `https://w25-term-backend.onrender.com/images/units/${encodeURIComponent(imageFileName)}`;
     
 
     const rawHealthValue = unit.health;    
