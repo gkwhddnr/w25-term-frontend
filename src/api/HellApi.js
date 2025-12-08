@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // 기본 API 인스턴스 생성 및 baseURL 설정
 const api = axios.create({
-    baseURL: 'http://localhost:8080/api', // 각 엔티티별 경로가 다르므로 /api까지만 설정
+    baseURL: 'https://w25-term-backend-1.onrender.com/api', // 각 엔티티별 경로가 다르므로 /api까지만 설정
     headers: {
         'Content-Type': 'application/json',
     },
