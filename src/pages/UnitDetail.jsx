@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import HellBackground from '../../images/지옥디 사진/hell_background.png';
 
-// (중략) auraStyles, themeStyles, fieldLabels 정의는 그대로 유지
+
 const auraStyles = {
   '대악마': { boxShadow: '0 0 30px 12px rgba(255, 0, 0, 1), 0 0 60px 25px rgba(125, 0, 0, 0.9)', border: '5px solid #000000ff' },
   '적대자': { boxShadow: '0 0 30px 12px rgba(0, 0, 0, 1), 0 0 60px 25px rgba(50, 50, 50, 0.9)', border: '5px solid #000000' },
